@@ -24,12 +24,10 @@ function getTimeRemaining(endtime) {
     var duration = Date.parse(endtime) - Date.parse(new Date()),
         seconds = Math.floor( (duration/1000) % 60 ),
         minutes = Math.floor( (duration/1000/60) % 60 ),
-        hours  = Math.floor( (duration/(1000*60*60)) % 24 ),
-        days  = Math.floor( (duration/(1000*60*60*24)));
+        hours  = Math.floor( (duration/1000) / 60 / 60 );
 
     return {
       'total': duration,
-      'days': days,
       'hours': hours,
       'minutes': minutes,
       'seconds': seconds
@@ -40,15 +38,14 @@ function initClock(id, endtime) {
   var clock = document.getElementById(id),
       interval = setInterval(function() {
       var time = getTimeRemaining(endtime);
-      clock.innerHTML = 'days: ' + time.days + '<br>' +
-                        'hours: ' + time.hours + '<br>' +
+      clock.innerHTML = 'hours: ' + time.hours + '<br>' +
                         'minutes: ' + time.minutes + '<br>' +
                         'seconds: ' + time.seconds;
 
       }, 1000);
 }
 
-var timeInMinutes = 10;
+var timeInMinutes = 4320;
 var currentTime = Date.parse(new Date());
 var deadline = new Date(currentTime + timeInMinutes*60*1000);
 initClock('timer', deadline); 
