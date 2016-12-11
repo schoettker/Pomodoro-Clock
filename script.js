@@ -35,14 +35,17 @@ function getTimeRemaining(endtime) {
 }
 
 function initClock(id, endtime) {
-  var clock = document.getElementById(id),
-      interval = setInterval(function() {
+  var clock = document.getElementById(id);
+
+    function updateClock() {
       var time = getTimeRemaining(endtime);
       clock.innerHTML = 'hours: ' + time.hours + '<br>' +
-                        'minutes: ' + time.minutes + '<br>' +
-                        'seconds: ' + time.seconds;
+        'minutes: ' + time.minutes + '<br>' +
+        'seconds: ' + time.seconds;
+    }
 
-      }, 1000);
+  updateClock();
+  var interval = setInterval(updateClock, 1000);
 }
 
 function startSession(id) {
