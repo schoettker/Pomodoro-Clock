@@ -34,6 +34,7 @@ function getTimeRemaining(endtime) {
     };
 }
 
+var pause;
 function initClock(id, endtime) {
   var clock = document.getElementById(id);
 
@@ -42,6 +43,16 @@ function initClock(id, endtime) {
       clock.innerHTML = 'hours: ' + time.hours + '<br>' +
         'minutes: ' + time.minutes + '<br>' +
         'seconds: ' + time.seconds;
+      if (time.total <= 0) {
+        clearInterval(interval);
+        if (pause) {
+          startSession('session-length');
+          pause = false;
+        } else {
+          startSession('pause-length');
+          pause = true;
+        }
+      }
     }
 
   updateClock();
