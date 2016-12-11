@@ -45,7 +45,11 @@ function initClock(id, endtime) {
       }, 1000);
 }
 
-var timeInMinutes = 4320;
-var currentTime = Date.parse(new Date());
-var deadline = new Date(currentTime + timeInMinutes*60*1000);
-initClock('timer', deadline); 
+function startSession(id) {
+  var length = document.getElementById(id).innerText;
+  length = length.replace(/\:/, '.');
+  var currentTime = Date.parse(new Date());
+  var deadline = new Date(currentTime + length*60*1000);
+  initClock('timer', deadline); 
+}
+startSession('session-length');
