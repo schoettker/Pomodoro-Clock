@@ -36,12 +36,16 @@ function getTimeRemaining(endtime) {
 
 function initClock(id, endtime, pause) {
   var clock = document.getElementById(id);
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+
 
     function updateClock() {
       var time = getTimeRemaining(endtime);
-      clock.innerHTML = 'hours: ' + time.hours + '<br>' +
-        'minutes: ' + time.minutes + '<br>' +
-        'seconds: ' + time.seconds;
+      hoursSpan.innerHTML = time.hours + ':';
+      minutesSpan.innerHTML =  ('0' + time.minutes).slice(-2) + ':';
+      secondsSpan.innerHTML = ('0' + time.seconds).slice(-2);
       if (time.total <= 0) {
         clearInterval(interval);
         if (pause) {
@@ -54,6 +58,7 @@ function initClock(id, endtime, pause) {
 
   updateClock();
   var interval = setInterval(updateClock, 1000);
+  pauseSession('pause-length', interval);
 }
 
 function startSession(id, pause) {
@@ -68,5 +73,18 @@ function startSession(id, pause) {
   // use this for testing
   var deadline = new Date(currentTime + (length*60*1000) / 0.60);
   initClock('timer', deadline, pause); 
+}
+
+function pauseSession(id, interval) {
+  var toggle = 1;
+  document.getElementById('pause').addEventListener('click', function(e) {
+    toggle = 1 - toggle;
+    if (toggle === 0) {
+      clearInterval(interval);
+
+    } else {
+      startSession(id, true);
+    }
+  });
 }
 startSession('session-length');
