@@ -34,7 +34,7 @@ function getTimeRemaining(endtime) {
     };
 }
 
-function initClock(id, endtime, pause) {
+function initClock(id, endtime, pause, toggle) {
   var clock = document.getElementById(id);
   var hoursSpan = clock.querySelector('.hours');
   var minutesSpan = clock.querySelector('.minutes');
@@ -49,19 +49,23 @@ function initClock(id, endtime, pause) {
       if (time.total <= 0) {
         clearInterval(interval);
         if (pause) {
-          startSession('session-length', false);
+          startSession('session-length', false, 0);
         } else {
-          startSession('pause-length', true);
+          startSession('pause-length', true, 1);
         }
       }
     }
 
   updateClock();
   var interval = setInterval(updateClock, 1000);
-  pauseSession('pause-length', interval);
+  if (toggle) {
+    pauseSession('pause-length', interval);
+  } else {
+    pauseSession('session-length', interval);
+  }
 }
 
-function startSession(id, pause) {
+function startSession(id, pause, toggle) {
   var length = document.getElementById(id).innerText;
   length = length.replace(/\:/, '.');
   var currentTime = Date.parse(new Date());
@@ -72,7 +76,7 @@ function startSession(id, pause) {
   // this would parse seconds correctly (00:30 e.g for a half minute)
   // use this for testing
   var deadline = new Date(currentTime + (length*60*1000) / 0.60);
-  initClock('timer', deadline, pause); 
+  initClock('timer', deadline, pause, toggle); 
 }
 
 function pauseSession(id, interval) {
@@ -81,9 +85,10 @@ function pauseSession(id, interval) {
     toggle = 1 - toggle;
     if (toggle === 0) {
       clearInterval(interval);
-
+      document.getElementById(id).querySelector('#sec').innerText = 
+        document.querySelector('.seconds').innerText;
     } else {
-      startSession(id, true);
+      startSession(id, true, toggle);
     }
   });
 }
