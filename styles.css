@@ -2,12 +2,19 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 body {
   background: #009688;
   font-family: 'Roboto', sans-serif;
 }
 .container {
-  background: #ff5252;
-  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: #009688;
+}
+.session, .pause, button, .pomodor {
+  margin: 1em;
 }
