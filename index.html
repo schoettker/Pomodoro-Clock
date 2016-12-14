@@ -4,20 +4,26 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <link rel="stylesheet" href="flipclock.css" type="text/css" />
+    <!-- <link rel="stylesheet" href="styles.css" type="text/css" /> -->
     <title>Pomodoro Clock</title>
   </head>
   <body>
-    <div class="container">
-      <div>Pause Length: <span id='pause-length'>00:<span id='sec'>10</span><span></div>
-      <div>Session Length <span id='session-length'>00:<span id='sec'>15</span></span></div>
-      <div id='pause'>
-        PAUSE
-      </div>
-      <div id='timer'>
-        <span class='hours'></span><span class='minutes'></span><span class='seconds'></span>
-      </div>
+    <div>Session Length: <span class='length'>28</span> minutes
+      <button id="inc-session" class='increase'>+</button>
+      <button id="dec-session" class='decrease'>-</button>
     </div>
+    <div>Pause Length: <span id='length'>2</span> minutes
+      <button class='increase'>+</button>
+      <button class='decrease'>-</button>
+    </div>
+    <button id='start'>Start</button>
+    <button id='stop'>Stop</button>
+    <button id='pause'>Pause</button>
+    <div class='pomodoro'>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8" src='flipclock.min.js'></script>
     <script type="text/javascript" charset="utf-8" src='script.js'></script>
   </body>
 </html>
