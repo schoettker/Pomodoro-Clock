@@ -71,7 +71,17 @@ function resetTimer() {
 
 function checkFinished(timeLeft) {
   if (timeLeft == 0 && !clock.running) {
-    // startTimer();
-    console.log('finisheeed');
+    if (clock.session) {
+      console.log('Time for a break :)');
+      clock.setTime(document.getElementById('pause-length').innerText*60);
+      startTimer()
+    } else if (clock.break) {
+      console.log('Now get some work done!');
+      clock.setTime(document.getElementById('session-length').innerText*60);
+      startTimer();
+    }
+    var temp = clock.session;
+    clock.session = clock.break;
+    clock.break = temp;
   }
 }
