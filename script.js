@@ -12,7 +12,9 @@ function buttonsIncreaseAndDecreaseLengths() {
     var element = document.getElementById(buttonId),
       length = element.parentElement.querySelector('.length');
     element.addEventListener('click', function(e) {
-      length.innerText = Number(length.innerText) - 1;
+      if (length.innerText > 1) {
+        length.innerText = Number(length.innerText) - 1;
+      }
     });
   }
   function increase(buttonId) {
