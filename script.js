@@ -2,8 +2,10 @@ var clock = new FlipClock($('.pomodoro'),{
   autoStart: false,
   clockFace: 'MinuteCounter',
   countdown: true,
-  running: false,
-  paused: false
+  isRunning: false,
+  paused: false,
+  break: false,
+  session: true
 });
 var elSessionLength = document.getElementById('session-length');
 
@@ -15,7 +17,7 @@ function buttonsIncreaseAndDecreaseLengths() {
     element.addEventListener('click', function(e) {
       if (length.innerText > 1) {
         length.innerText = Number(length.innerText) - 1;
-        if (!clock.running && !clock.paused) {
+        if (!clock.isRunning && !clock.paused) {
           clock.setTime(elSessionLength.innerText*60);
         }
       }
@@ -26,7 +28,7 @@ function buttonsIncreaseAndDecreaseLengths() {
       length = element.parentElement.querySelector('.length');
     element.addEventListener('click', function(e) {
       length.innerText = Number(length.innerText) + 1;
-      if (!clock.running && !clock.paused) {
+      if (!clock.isRunning && !clock.paused) {
         clock.setTime(elSessionLength.innerText*60);
       }
     });
@@ -43,13 +45,16 @@ document.getElementById('start')
   startTimer();
 });
 function startTimer() {
-  clock.start();
-  clock.running = true;
+  clock.start(function() {
+    // console.log(clock.time.time);
+    checkFinished(clock.time.time);
+  });
+  clock.isRunning = true;
 }
 document.getElementById('stop')
 .addEventListener('click', function(e) {
   stopTimer();
-  clock.running = false;
+  clock.isRunning = false;
   clock.paused = true;
 });
 function stopTimer() {
@@ -62,4 +67,11 @@ document.getElementById('reset')
 function resetTimer() {
   clock.stop();
   clock.setTime(document.getElementById('session-length').innerText*60);
+}
+
+function checkFinished(timeLeft) {
+  if (timeLeft == 0 && !clock.running) {
+    // startTimer();
+    console.log('finisheeed');
+  }
 }
