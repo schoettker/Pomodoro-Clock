@@ -2,7 +2,8 @@ var clock = new FlipClock($('.pomodoro'),{
   autoStart: false,
   clockFace: 'MinuteCounter',
   countdown: true,
-  running: false
+  running: false,
+  paused: false
 });
 var elSessionLength = document.getElementById('session-length');
 
@@ -14,7 +15,7 @@ function buttonsIncreaseAndDecreaseLengths() {
     element.addEventListener('click', function(e) {
       if (length.innerText > 1) {
         length.innerText = Number(length.innerText) - 1;
-        if (!clock.running) {
+        if (!clock.running && !clock.paused) {
           clock.setTime(elSessionLength.innerText*60);
         }
       }
@@ -25,7 +26,7 @@ function buttonsIncreaseAndDecreaseLengths() {
       length = element.parentElement.querySelector('.length');
     element.addEventListener('click', function(e) {
       length.innerText = Number(length.innerText) + 1;
-      if (!clock.running) {
+      if (!clock.running && !clock.paused) {
         clock.setTime(elSessionLength.innerText*60);
       }
     });
@@ -43,11 +44,13 @@ document.getElementById('start')
 });
 function startTimer() {
   clock.start();
-  clock['running'] = true;
+  clock.running = true;
 }
 document.getElementById('stop')
 .addEventListener('click', function(e) {
   stopTimer();
+  clock.running = false;
+  clock.paused = true;
 });
 function stopTimer() {
   clock.stop();
@@ -60,6 +63,3 @@ function resetTimer() {
   clock.stop();
   clock.setTime(document.getElementById('session-length').innerText*60);
 }
-// // changeLengths('session-
-// var but = document.getElementById('inc-session').parentElement;
-// console.log(but.querySelector('.session-length'));
