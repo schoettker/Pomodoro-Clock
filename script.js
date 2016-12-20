@@ -46,7 +46,6 @@ document.getElementById('start')
 });
 function startTimer() {
   clock.start(function() {
-    // console.log(clock.time.time);
     checkFinished(clock.time.time);
   });
   clock.isRunning = true;
@@ -66,6 +65,8 @@ document.getElementById('reset')
 });
 function resetTimer() {
   clock.stop();
+  clock.paused = false;
+  clock.isRunning = false;
   clock.setTime(document.getElementById('session-length').innerText*60);
 }
 
