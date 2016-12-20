@@ -7,14 +7,54 @@ body {
 body {
   background: #009688;
   font-family: 'Roboto', sans-serif;
+  color: white;
 }
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   background: #009688;
+  height: 100%;
+  width: 50%;
+  margin: 0 auto;
 }
 .session, .pause, button, .pomodor {
-  margin: 1em;
+  /* margin: 1em; */
+}
+.wrap {
+  background: #FF5252;
+  border-radius: 6px;
+  text-align: center;
+  padding: 2em;
+}
+button {
+  background: #FF5252;
+  outline: none;
+  margin: .75em auto;
+  color: #ffffff;
+  padding: .8em 1em;
+  border: solid #009688;
+  transition: .3s;
+  /* border: none; */
+  /* color: white; */
+  /* padding: 1em; */
+  /* border-radius: 3px; */
+}
+button:hover {
+  background: #009688;
+  cursor: pointer;
+}
+.increase, .decrease {
+  font-size: 1.2em;
+  padding: 0.25em 1em;
+}
+.button-grp {
+  display: block;
+}
+.session, .pause {
+  font-size: 1.2em;
+  /* font-weight: bold; */
+}
+.pomodoro {
+  margin-top: 2em;
 }
