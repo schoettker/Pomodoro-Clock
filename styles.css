@@ -26,6 +26,8 @@ body {
   border-radius: 6px;
   text-align: center;
   padding: 2em;
+  min-width: 364px;
+  box-sizing: border-box;
 }
 button {
   background: #FF5252;
