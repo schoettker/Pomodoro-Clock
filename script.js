@@ -13,7 +13,7 @@ clock.setTime(elSessionLength.innerText*60);
 function buttonsIncreaseAndDecreaseLengths() {
   function decrease(buttonId) {
     var element = document.getElementById(buttonId),
-      length = element.parentElement.querySelector('.length');
+      length = element.parentElement.parentElement.querySelector('.length');
     element.addEventListener('click', function(e) {
       if (length.innerText > 1) {
         length.innerText = Number(length.innerText) - 1;
@@ -25,7 +25,7 @@ function buttonsIncreaseAndDecreaseLengths() {
   }
   function increase(buttonId) {
     var element = document.getElementById(buttonId),
-      length = element.parentElement.querySelector('.length');
+      length = element.parentElement.parentElement.querySelector('.length');
     element.addEventListener('click', function(e) {
       length.innerText = Number(length.innerText) + 1;
       if (!clock.isRunning && !clock.paused) {
