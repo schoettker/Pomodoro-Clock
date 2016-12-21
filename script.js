@@ -49,6 +49,7 @@ function startTimer() {
     checkFinished(clock.time.time);
   });
   clock.isRunning = true;
+  // playSound('audio');
 }
 document.getElementById('stop')
 .addEventListener('click', function(e) {
@@ -85,4 +86,8 @@ function checkFinished(timeLeft) {
     clock.session = clock.break;
     clock.break = temp;
   }
+}
+
+function playSound(audioId) {
+  document.getElementById(audioId).play();
 }
